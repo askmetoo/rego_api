@@ -2,10 +2,10 @@ from cmd import Cmd
 from io import BytesIO
 from xml.etree import ElementTree
 
-from SpiffWorkflow.bpmn.serializer.BpmnSerializer import BpmnSerializer
 from SpiffWorkflow.bpmn.serializer.Packager import Packager
 from SpiffWorkflow.bpmn.workflow import BpmnWorkflow
 
+from SpiffExtensions.Camunda.BpmnSerializer import BpmnSerializer
 from SpiffExtensions.CustomBpmnScriptEngine import CustomBpmnScriptEngine
 from model.fact import Fact
 
@@ -31,17 +31,10 @@ class InMemoryPackager(Packager):
 class MyPrompt(Cmd):
 
     def bpmn_diagram_to_spec(self, file_path):
-        """Basically, pre-parse the xml and figure out what the primary process id is (where do you start?),
-        and what editor created the file. Then load the full file into a byte array and generate a Spiff
-        Workflow spec from that file. This describes a full process in abstract.  We'll later instantiate the
-        spec and run it through to it's completion."""
-        packager = InMemoryPackager
-        etr_root = ElementTree.parse(file_path).getroot() # definitions
-        process_id = self.__getWorkflowProcessID(ETRroot=etr_root)
-        editor = etr_root.attrib['exporter'] # the program that generated the BPMN Diagram
-        package = packager.package_in_memory(process_id, file_path, editor)
-        workflowSpec = BpmnSerializer().deserialize_workflow_spec(package)
+        workflowSpec = BpmnSerializer().deserialize_workflow_spec('bpmn/')
         return workflowSpec
+
+
 
     @staticmethod
     def __getWorkflowProcessID(ETRroot):

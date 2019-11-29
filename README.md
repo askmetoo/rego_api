@@ -13,7 +13,15 @@ python FactCommandLine.py
 
 ## You can execute the script by typing 
 ```
-> next         // Runs all tasks from the diagram
-> type cat     // sets the type of fact to cat
+> next         // Runs all "engine" or automated tasks from the diagram.
+> type cat     // sets the type of fact to cat 
 > next         // Runs the final task which should print out the fact.
 ```
+
+
+## TODO:
+SpiffExtensions should likely be factored out into a library that other
+systems will use to load diagrams and provide apis.  This directory contains
+custom implementations of BPMN parsers and Tasks that can take advantage
+of Camunda's custom tags within BPMN.
+
