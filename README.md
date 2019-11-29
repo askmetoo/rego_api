@@ -8,15 +8,11 @@ fact from one of a set of open apis.  Printing the fact out to the command line.
 ## Getting Started
 ```bash
 pip install -r requirements.txt
-python FactCommandLine.py
+python fact_runner.py
 ```
-
-## You can execute the script by typing 
-```
-> next         // Runs all "engine" or automated tasks from the diagram.
-> type cat     // sets the type of fact to cat 
-> next         // Runs the final task which should print out the fact.
-```
+Based on the from defined in the BPMN Model, you will be asked a question.
+you will given a set of options.  It will then run a script that will look for
+the selected value and execute an API call to get the fact back, and print it.
 
 
 ## TODO:
